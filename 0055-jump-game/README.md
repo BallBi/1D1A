@@ -26,3 +26,39 @@
 	<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
 	<li><code>0 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
+
+
+<p>Return <code>true</code><em> if you can reach the last index, or </em><code>false</code><em> otherwise</em>.</p>
+
+
+
+## Wrong Answer ( Time Limited )
+
+시간 생각 안해보고 일단 재귀로 해볼까? 하고 해본 코드
+
+```
+bool AgainJump(vector<int>& nums, int index)
+{
+    if (index >= nums.size() - 1)
+        return true;
+
+    for (int i = 1; i <= nums[index]; ++i)
+    {
+        int idx = index + i;
+        if (nums[idx] >= nums.size() - 1)
+            return true;
+
+        if (true == AgainJump(nums, idx))
+            return true;
+    }
+
+    return false;
+}
+
+bool canJump(vector<int>& nums) {
+    if (1 == nums.size())
+        return true;
+
+    return AgainJump(nums, 0);
+}
+```
